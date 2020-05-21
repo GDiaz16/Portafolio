@@ -1,0 +1,66 @@
+:root{
+    --font-color: rgb(247, 251, 255);
+    --background-home: black;
+}
+
+body{
+/*     background-color: var(--background-home);
+ */ background-image: url(fondo.png);
+     color: var(--font-color);
+
+}
+.title-home {
+    font-family: 'Verdana';
+    font-size: 350%;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.column-title-home{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+
+}
+.column-menu-home{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+.menu-home{
+    font-family: 'Helvetica';
+}
+
+ul{
+    list-style-type: none;
+    font-size: 150%;
+}
+
+.menu-home li{
+    margin: 10%;
+    padding: 5%;
+/*     background-color: black;
+ */    text-align: center;
+}
+
+.column-button-home{
+    padding: 15%;
+}
+
+.button-home button{
+    background-color: transparent;
+    font-size: 20px;
+    color: var(--font-color);
+    padding: 10px;
+    border-radius: 15px;
+
+}
+
+.button-home button:hover{
+    background-color: rgb(9, 113, 121);
+}
