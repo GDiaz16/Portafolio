@@ -3,34 +3,143 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import foto from './foto_portada.jpg';
 
-function Home(props) {
-  return (
-    <div>
-        <div className='row'>
-            <Menu />
-            <Content />
-        </div>
-    </div>
-  );
-}
+class Home extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {visible: false};
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
 
-function Menu(props) {
-  return (
+  updateWindowDimensions() {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+    this.responsive();
+  }
 
-    <div className='column-menu-home'>
-      <PhotoHome />
-      <Title />
-      <div className='menu-home'>
-        <ul>
-          <li>Sobre mi</li>
-          <li>Resumen</li>
-          <li>Proyectos</li>
-          <li>Contáctame</li>
-        </ul>
+  responsive(){
+    console.log(this.state.width) 
+    if(this.state.width>=900){
+      this.setState({visible: true})
+      this.showMenu(false);
+      this.deanimate();
+    }else{
+      this.hideMenu(false);
+      this.setState({visible: false})
+      //this.animate();
+    }
+  }
+
+  acceptMethods=(showMenu, hideMenu, animate, deanimate)=>{
+    this.showMenu = showMenu;
+    this.hideMenu = hideMenu;
+    this.animate = animate;
+    this.deanimate = deanimate;
+  }
+
+  toggle(){
+    this.setState({visible: !this.state.visible})
+    if(this.state.visible){
+      this.hideMenu(true);
+    }else{
+      this.showMenu(true);
+    }
+  }
+
+  render(){
+    return (
+      <div>
+          <div className='row'>
+              <Navbar 
+                onClick={()=>this.toggle()}/>
+              <Menu 
+                visible ={this.state.visible}
+                acceptMethods={this.acceptMethods} />
+              <Content />
+          </div>
       </div>
-    </div>
-  )
+    );
+  }
 }
+
+class Navbar extends React.Component{
+  render(){
+    return(
+      <div className='navbar'>
+      <div className='row '>
+      <button onClick={()=>this.props.onClick()}><i className='fas fa-bars'></i></button>
+      <img src={foto} />
+      </div>
+      </div>
+    );
+  }
+}
+
+
+
+class Menu extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.menu = React.createRef()
+    this.state = { width: 0, height: 0 };
+
+  }
+
+  componentDidMount(){
+    this.props.acceptMethods(
+      this.showMenu.bind(this), 
+      this.hideMenu.bind(this),
+      this.animate.bind(this),
+      this.deanimate.bind(this)
+    )
+  }
+
+  showMenu(animate){
+    if(animate){
+      this.animate()
+    }else{
+      this.deanimate()
+    }
+    this.menu.current.style.left = '0vw';
+
+}
+
+  hideMenu(animate){
+    if(animate){
+      this.animate()
+    }else{
+      this.deanimate()
+    }
+    this.menu.current.style.left = '-30vw';
+  }
+
+  animate(){
+    this.menu.current.style.transition = 'left 1s';
+  }
+
+  deanimate(){
+    this.menu.current.style.transition = 'none';
+  }
+
+  render(){
+    return (
+
+      <div className='column-menu-home' ref = {this.menu}>
+        <PhotoHome />
+        <Title />
+        <div className='menu-home'>
+          <ul>
+            <li>Sobre mi</li>
+            <li>Resumen</li>
+            <li>Proyectos</li>
+            <li>Contáctame</li>
+          </ul>
+        </div>
+      </div>
+    );
+  }
+}
+
 function Content(props) {
   return (
     <div >
@@ -113,6 +222,7 @@ function About(props) {
 }
 
 class Body extends React.Component {
+
   render() {
     return (
       <div> <Home /></div>

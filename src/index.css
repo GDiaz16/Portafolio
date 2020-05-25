@@ -18,22 +18,66 @@ body {
 .row {
     display: flex;
     flex-direction: row;
+    padding: 0;
 }
 
-.footer{
-   padding-bottom: 100px;
+.footer {
+    padding-bottom: 100px;
 }
+
+/* Navbar superior -----------------------------------------------*/
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--background-panel);
+    position: fixed;
+    top: 0px;
+    height: 8%;
+    width: 100%;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    display: none;
+}
+
+.navbar img {
+    height: 6vh;
+    margin: 1vh;
+}
+
+.navbar button {
+    border-style: none;
+    background-color: var(--background-panel);
+}
+
+.navbar button:hover{
+    background-color: var(--hover-color);
+}
+.navbar button i {
+    font-size: 30px;
+}
+
 /* Menu de la izquierda------------------------------------------ */
 
 .column-menu-home {
     display: flex;
     flex-direction: column;
-    width: 12vw;
+    max-width: 12vw;
     height: 100%;
     position: fixed;
     top: 0px;
-    left: 0px;
+    left: 0vw;
     background-color: var(--background-panel);
+/*     transition: left 0.5s;
+ */}
+
+
+.show-menu{
+    max-width: 20vw;
+}
+
+.hide-menu{
+    max-width: 0;
 }
 
 .photo-home img {
@@ -129,32 +173,60 @@ ul {
     font-size: 15px;
 }
 
-.title-2{
+.title-2 {
     margin-left: 5%;
     margin-right: 5%;
     border-style: solid;
     border-width: 0 0 1px 0;
 }
 
-.col-50{
+.col-50 {
     display: flex;
     flex-direction: column;
     width: 50%;
     padding-left: 2%;
     padding-right: 5%;
-
 }
 
-.col-50 p{
+.col-50 p {
     line-height: 30px;
 }
 
-.interest-col{
-    margin-left: 5% ;
+.interest-col {
+    margin-left: 5%;
     margin-right: 5%;
 }
-.row i{
+
+.row i {
     font-size: 50px;
     color: gray;
     margin: 2% 0 0 0%;
+}
+
+/* Responsive "Sobre mi"--------- */
+
+@media only screen and (max-width: 900px) {
+    .column-menu-home {
+        max-width: 20vw;
+        left: -30vw;
+        top: 8%;
+        overflow: hidden;
+    }
+    .content-col {
+        margin-left: 0;
+        margin-top: 8vh;
+        width: 100vw;
+    }
+    .navbar {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .column-menu-home {
+        max-width: 30vw;
+        left: -30vw;
+        top: 8%;
+        overflow: hidden;
+    }
 }
